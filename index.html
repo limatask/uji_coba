@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal UJI COBA ASTS - SMPN 5 Kota Tangerang</title>
+  <style>
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    body, html {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1e1e2e;
+      color: #cdd6f4;
+    }
+
+    #setup-portal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #181825;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .corner-logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: auto;
+    }
+
+    .card {
+      background: #313244;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+
+    .school-logo {
+      width: 85px;
+      height: auto;
+      margin-bottom: 12px;
+    }
+
+    .card h2 { margin-bottom: 4px; color: #89b4fa; font-size: 20px; }
+    .card h3 { font-size: 13px; color: #a6adc8; margin-bottom: 15px; font-weight: 500; }
+    .card p { font-size: 12px; margin-bottom: 20px; color: #bac2de; }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label { font-size: 13px; font-weight: bold; color: #a6adc8; display: block; margin-bottom: 5px; }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #45475a;
+      background: #1e1e2e;
+      color: #cdd6f4;
+      font-size: 14px;
+      outline: none;
+    }
+
+    #start-btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #a6e3a1;
+      color: #11111b;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    #lock-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #11111b;
+      color: #f38ba8;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #form-container {
+      width: 100%; height: 100%;
+      display: none;
+    }
+
+    iframe {
+      width: 100%; height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PORTAL PILIHAN SISWA -->
+  <div id="setup-portal">
+    <img src="logo.png" alt="Logo SMPN 5 Tangerang" class="corner-logo">
+
+    <div class="card">
+      <img src="logo.png" alt="Logo SMPN 5 Tangerang" class="school-logo">
+      <h2>PORTAL UJI COBA ASTS ONLINE</h2>
+      <h3>Asesmen Sumatif Tengah Semester<br>SMP Negeri 5 Kota Tangerang</h3>
+      <p>Sistem verifikasi jadwal ujian otomatis &amp; terproteksi.</p>
+      
+      <div class="form-group">
+        <label for="kelas-select">PILIH KELAS:</label>
+        <select id="kelas-select">
+          <option value="">-- Pilih Kelas --</option>
+          <option value="7">Kelas 7</option>
+          <option value="8">Kelas 8</option>
+          <option value="9">Kelas 9</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="mapel-select">PILIH MATA PELAJARAN:</label>
+        <select id="mapel-select">
+          <option value="">-- Pilih Mapel --</option>
+          <!-- SENIN -->
+          <option value="PAI">PAI &amp; Budi Pekerti (Senin, 08.00 - 09.30)</option>
+          <option value="PAK">Pendidikan Agama Kristen &amp; BP (Senin, 08.00 - 09.30)</option>
+          <option value="KATOLIK">Pendidikan Agama Katholik &amp; BP (Senin, 08.00 - 09.30)</option>
+          <option value="BUDDHA">Pendidikan Agama Buddha &amp; BP (Senin, 08.00 - 09.30)</option>
+          <option value="HINDU">Pendidikan Agama Hindu &amp; BP (Senin, 08.00 - 09.30)</option>
+          <option value="IPA">IPA (Senin, 10.00 - 22.00)</option>
+
+          <!-- SELASA -->
+          <option value="BINDO">Bahasa Indonesia (Selasa, 00.00 - 12.00)</option>
+          <option value="IPS">IPS (Selasa, 12.00 - 22.00)</option>
+
+          <!-- RABU -->
+          <option value="MTK">Matematika (Rabu, 00.00 - 12.00)</option>
+          <option value="BING">Bahasa Inggris (Rabu, 12.00 - 22.00)</option>
+
+          <!-- KAMIS -->
+          <option value="PPKN">Pendidikan Pancasila (Kamis, 00.00 - 12.00)</option>
+          <option value="INF">Informatika (Kamis, 12.00 - 22.00)</option>
+          
+
+          <!-- JUMAT -->
+          <option value="SBK">Seni Budaya (Jumat, 00.00 - 12.00)</option>
+          <option value="PJOK">PJOK (Jumat, 12.00 - 22.00)</option>
+		  
+		  <!-- SABTU -->
+		  <option value="KKA">KKA (Sabtu, 00.00 - 22.00)</option>
+		  
+		  <!-- MINGGU -->
+		  <option value="KKA">KKA (Minggu, 00.00 - 22.00)</option>
+		  
+        </select>
+      </div>
+
+      <button id="start-btn" onclick="startExam()">Mulai Ujian UJI COBA ASTS (Fullscreen)</button>
+    </div>
+  </div>
+
+  <!-- OVERLAY HITAM JIKA TERKUNCI PERMANEN -->
+  <div id="lock-overlay">
+    <img src="logo.png" alt="Logo SMPN 5 Tangerang" style="width: 70px; margin-bottom: 15px;">
+    <h1 style="font-size: 28px; margin-bottom: 10px;">UJIAN ASTS DIKUNCI PERMANEN!</h1>
+    <p id="lock-reason" style="font-size: 16px; color: #cdd6f4;">Batas kesempatan pelanggaran telah habis.</p>
+    <p style="color: #a6adc8; margin-top: 15px;">Ujian ASTS untuk mata pelajaran ini tidak dapat dibuka lagi.<br>Segera angkat tangan dan lapor ke Pengawas Ruangan!</p>
+  </div>
+
+  <!-- CONTAINER GOOGLE FORM -->
+  <div id="form-container">
+    <iframe id="google-form" src="">Loading…</iframe>
+  </div>
+
+  <script>
+    const scheduleConfig = {
+      "PAI":     { day: 1, start: 8.0,  end: 9.5  },
+      "PAK":     { day: 1, start: 8.0,  end: 9.5  },
+      "KATOLIK": { day: 1, start: 8.0,  end: 9.5  },
+      "BUDDHA":  { day: 1, start: 8.0,  end: 9.5  },
+      "HINDU":   { day: 1, start: 8.0,  end: 9.5  },
+      "IPA":     { day: 1, start: 10.0, end: 22.0 },
+      "BINDO":   { day: 2, start: 0.0,  end: 12.0 },
+      "IPS":     { day: 2, start: 12.0, end: 22.0 },
+      "MTK":     { day: 3, start: 0.0,  end: 12.0 },
+      "BING":    { day: 3, start: 12.0, end: 22.0 },
+      "PPKN":    { day: 4, start: 0.0,  end: 12.0  },
+      "INF":     { day: 4, start: 12.0, end: 22.0 },
+      "SBK":     { day: 5, start: 0.0,  end: 12.0  },
+      "PJOK":    { day: 5, start: 12.0, end: 22.0 },
+	  "KKA":     { day: 6, start: 0.0, end: 22.0 },
+	  "KKA1":     { day: 7, start: 0.0, end: 22.0 }
+    };
+
+    const formLinks = {
+      "7": {
+        "PAI": "https://forms.gle/jhuxhDApuSFg5qmH8",
+        "PAK": "https://forms.gle/jhuxhDApuSFg5qmH8",
+        "KATOLIK": "https://forms.gle/jhuxhDApuSFg5qmH8",
+        "BUDDHA": "https://forms.gle/jhuxhDApuSFg5qmH8",
+        "IPA": "https://forms.gle/jhuxhDApuSFg5qmH8",
+        "BINDO": "https://forms.gle/jhuxhDApuSFg5qmH8",
+        "IPS": "https://forms.gle/jhuxhDApuSFg5qmH8",
+        "MTK": "https://forms.gle/jhuxhDApuSFg5qmH8",
+        "BING": "https://docs.google.com/forms/d/e/LINK_FORM_BING_K7/viewform?embedded=true",
+        "PPKN": "https://docs.google.com/forms/d/e/LINK_FORM_PPKN_K7/viewform?embedded=true",
+        "INF": "https://docs.google.com/forms/d/e/LINK_FORM_INF_K7/viewform?embedded=true",
+        "KKA": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
+		"KKA": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
+        "SBK": "https://forms.gle/jhuxhDApuSFg5qmH8",
+        "PJOK": "https://forms.gle/jhuxhDApuSFg5qmH8"
+      },
+      "8": {
+        "PAI": "https://docs.google.com/forms/d/e/LINK_FORM_PAI_K8/viewform?embedded=true",
+        "PAK": "https://docs.google.com/forms/d/e/LINK_FORM_PAK_K8/viewform?embedded=true",
+        "KATOLIK": "https://docs.google.com/forms/d/e/LINK_FORM_KATOLIK_K8/viewform?embedded=true",
+        "BUDDHA": "https://docs.google.com/forms/d/e/LINK_FORM_BUDDHA_K8/viewform?embedded=true",
+        "IPA": "https://docs.google.com/forms/d/e/LINK_FORM_IPA_K8/viewform?embedded=true",
+        "BINDO": "https://docs.google.com/forms/d/e/LINK_FORM_BINDO_K8/viewform?embedded=true",
+        "IPS": "https://docs.google.com/forms/d/e/LINK_FORM_IPS_K8/viewform?embedded=true",
+        "MTK": "https://docs.google.com/forms/d/e/LINK_FORM_MTK_K8/viewform?embedded=true",
+        "BING": "https://docs.google.com/forms/d/e/LINK_FORM_BING_K8/viewform?embedded=true",
+        "PPKN": "https://docs.google.com/forms/d/e/LINK_FORM_PPKN_K8/viewform?embedded=true",
+        "INF": "https://docs.google.com/forms/d/e/LINK_FORM_INF_K8/viewform?embedded=true",
+        "SBK": "https://docs.google.com/forms/d/e/LINK_FORM_SBK_K8/viewform?embedded=true",
+        "PJOK": "https://docs.google.com/forms/d/e/LINK_FORM_PJOK_K8/viewform?embedded=true",
+		"KKA": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
+		"KKA1": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true"
+"
+      },
+      "9": {
+        "PAI": "https://docs.google.com/forms/d/e/LINK_FORM_PAI_K9/viewform?embedded=true",
+        "PAK": "https://docs.google.com/forms/d/e/LINK_FORM_PAK_K9/viewform?embedded=true",
+        "KATOLIK": "https://docs.google.com/forms/d/e/LINK_FORM_KATOLIK_K9/viewform?embedded=true",
+        "BUDDHA": "https://docs.google.com/forms/d/e/LINK_FORM_BUDDHA_K9/viewform?embedded=true",
+        "HINDU": "https://docs.google.com/forms/d/e/LINK_FORM_HINDU_K9/viewform?embedded=true",
+        "IPA": "https://docs.google.com/forms/d/e/LINK_FORM_IPA_K9/viewform?embedded=true",
+        "BINDO": "https://docs.google.com/forms/d/e/LINK_FORM_BINDO_K9/viewform?embedded=true",
+        "IPS": "https://docs.google.com/forms/d/e/LINK_FORM_IPS_K9/viewform?embedded=true",
+        "MTK": "https://docs.google.com/forms/d/e/LINK_FORM_MTK_K9/viewform?embedded=true",
+        "BING": "https://docs.google.com/forms/d/e/LINK_FORM_BING_K9/viewform?embedded=true",
+        "PPKN": "https://docs.google.com/forms/d/e/LINK_FORM_PPKN_K9/viewform?embedded=true",
+        "INF": "https://docs.google.com/forms/d/e/LINK_FORM_INF_K9/viewform?embedded=true",
+        "SBK": "https://docs.google.com/forms/d/e/LINK_FORM_SBK_K9/viewform?embedded=true",
+        "PJOK": "https://docs.google.com/forms/d/e/LINK_FORM_PJOK_K9/viewform?embedded=true",
+		"KKA": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
+		"KKA1": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true"
+      }
+    };
+
+    let violationCount = 0;
+    const maxViolations = 5;
+    let isExamStarted = false;
+    let currentExamKey = "";
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('paste', e => e.preventDefault());
+    document.addEventListener('cut', e => e.preventDefault());
+
+    function checkSchedule(mapel) {
+      const now = new Date();
+      const currentDay = now.getDay();
+      const currentHour = now.getHours() + (now.getMinutes() / 60);
+
+      const target = scheduleConfig[mapel];
+      if (!target) return { valid: true };
+
+      if (currentDay !== target.day) {
+        return { valid: false, reason: "Ujian ASTS mata pelajaran ini TIDAK dijadwalkan untuk hari ini!" };
+      }
+
+      if (currentHour < target.start || currentHour > target.end) {
+        return { valid: false, reason: "Mata pelajaran ini belum dimulai atau waktu ujian ASTS telah selesai!" };
+      }
+
+      return { valid: true };
+    }
+
+    function startExam() {
+      const kelas = document.getElementById('kelas-select').value;
+      const mapel = document.getElementById('mapel-select').value;
+
+      if (!kelas || !mapel) {
+        alert("Silakan pilih KELAS dan MATA PELAJARAN terlebih dahulu!");
+        return;
+      }
+
+      if (mapel === "HINDU" && (kelas === "7" || kelas === "8")) {
+        alert("Mata pelajaran Agama Hindu tidak tersedia untuk Kelas " + kelas + "!");
+        return;
+      }
+
+      if (mapel === "KKA" && (kelas === "8" || kelas === "9")) {
+        alert("Mata pelajaran KKA hanya tersedia untuk Kelas 7!");
+        return;
+      }
+
+      currentExamKey = `asts_locked_${kelas}_${mapel}`;
+
+      if (localStorage.getItem(currentExamKey) === "true") {
+        lockExam(`Akses Ditolak! HP kamu telah dikunci permanen untuk ujian ASTS ${mapel} Kelas ${kelas}.`);
+        return;
+      }
+
+      const scheduleStatus = checkSchedule(mapel);
+      if (!scheduleStatus.valid) {
+        alert("AKSES DITOLAK!\n" + scheduleStatus.reason);
+        return;
+      }
+
+      const selectedFormUrl = formLinks[kelas]?.[mapel];
+      if (!selectedFormUrl || selectedFormUrl.includes("LINK_")) {
+        alert("Link Google Form untuk mata pelajaran ini belum dimasukkan!");
+        return;
+      }
+
+      document.getElementById('google-form').src = selectedFormUrl;
+
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      }
+
+      document.getElementById('setup-portal').style.display = 'none';
+      document.getElementById('form-container').style.display = 'block';
+
+      history.pushState(null, null, location.href);
+      isExamStarted = true;
+    }
+
+    window.addEventListener('popstate', function () {
+      if (isExamStarted) {
+        history.pushState(null, null, location.href);
+        recordViolation("Menekan tombol Kembali / Back");
+      }
+    });
+
+    function handleVisibilityLoss(reason) {
+      if (!isExamStarted) return;
+      recordViolation(reason);
+    }
+
+    window.addEventListener('blur', () => {
+      handleVisibilityLoss("Pindah aplikasi / Membuka Notifikasi WA / Floating App");
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        handleVisibilityLoss("Keluar Halaman / Membuka Tab Lain");
+      }
+    });
+
+    document.addEventListener('fullscreenchange', exitHandler);
+    document.addEventListener('webkitfullscreenchange', exitHandler);
+
+    function exitHandler() {
+      if (!document.fullscreenElement && !document.webkitIsFullScreen && isExamStarted) {
+        recordViolation("Keluar dari Layar Penuh (Fullscreen)");
+      }
+    }
+
+    function recordViolation(reason) {
+      violationCount++;
+      const remainingChance = maxViolations - violationCount;
+
+      if (violationCount < maxViolations) {
+        alert(`PERINGATAN PELANGGARAN (${violationCount}/${maxViolations})!\n\nTerdeteksi: ${reason}.\nSisa kesempatan kamu: ${remainingChance} kali lagi!\nJika melanggar sampai 5 kali, ujian ASTS akan DIKUNCI PERMANEN.`);
+      } else {
+        if (currentExamKey) {
+          localStorage.setItem(currentExamKey, "true");
+        }
+        lockExam(`Kamu dikunci dari ujian ASTS karena melanggar sebanyak ${violationCount} kali! (${reason})`);
+      }
+    }
+
+    function lockExam(message) {
+      isExamStarted = false;
+      document.getElementById('form-container').style.display = 'none';
+      document.getElementById('setup-portal').style.display = 'none';
+      
+      const lockOverlay = document.getElementById('lock-overlay');
+      document.getElementById('lock-reason').innerText = message;
+      lockOverlay.style.display = 'flex';
+
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  </script>
+</body>
+</html>
