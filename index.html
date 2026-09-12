@@ -163,18 +163,16 @@
           <!-- KAMIS -->
           <option value="PPKN">Pendidikan Pancasila (Kamis, 00.00 - 12.00)</option>
           <option value="INF">Informatika (Kamis, 12.00 - 22.00)</option>
-          
 
           <!-- JUMAT -->
           <option value="SBK">Seni Budaya (Jumat, 00.00 - 12.00)</option>
           <option value="PJOK">PJOK (Jumat, 12.00 - 22.00)</option>
 		  
-		  <!-- SABTU -->
-		  <option value="KKA">KKA (Sabtu, 00.00 - 22.00)</option>
+          <!-- SABTU -->
+          <option value="KKA">KKA (Sabtu, 00.00 - 22.00)</option>
 		  
-		  <!-- MINGGU -->
-		  <option value="KKA">KKA (Minggu, 00.00 - 22.00)</option>
-		  
+          <!-- MINGGU -->
+          <option value="KKA1">KKA (Minggu, 00.00 - 22.00)</option>
         </select>
       </div>
 
@@ -207,12 +205,12 @@
       "IPS":     { day: 2, start: 12.0, end: 22.0 },
       "MTK":     { day: 3, start: 0.0,  end: 12.0 },
       "BING":    { day: 3, start: 12.0, end: 22.0 },
-      "PPKN":    { day: 4, start: 0.0,  end: 12.0  },
+      "PPKN":    { day: 4, start: 0.0,  end: 12.0 },
       "INF":     { day: 4, start: 12.0, end: 22.0 },
-      "SBK":     { day: 5, start: 0.0,  end: 12.0  },
+      "SBK":     { day: 5, start: 0.0,  end: 12.0 },
       "PJOK":    { day: 5, start: 12.0, end: 22.0 },
-	  "KKA":     { day: 6, start: 0.0, end: 22.0 },
-	  "KKA1":     { day: 7, start: 0.0, end: 22.0 }
+      "KKA":     { day: 6, start: 0.0,  end: 22.0 },
+      "KKA1":    { day: 0, start: 0.0,  end: 22.0 }
     };
 
     const formLinks = {
@@ -229,7 +227,7 @@
         "PPKN": "https://docs.google.com/forms/d/e/LINK_FORM_PPKN_K7/viewform?embedded=true",
         "INF": "https://docs.google.com/forms/d/e/LINK_FORM_INF_K7/viewform?embedded=true",
         "KKA": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
-		"KKA": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
+        "KKA1": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
         "SBK": "https://forms.gle/jhuxhDApuSFg5qmH8",
         "PJOK": "https://forms.gle/jhuxhDApuSFg5qmH8"
       },
@@ -247,9 +245,8 @@
         "INF": "https://docs.google.com/forms/d/e/LINK_FORM_INF_K8/viewform?embedded=true",
         "SBK": "https://docs.google.com/forms/d/e/LINK_FORM_SBK_K8/viewform?embedded=true",
         "PJOK": "https://docs.google.com/forms/d/e/LINK_FORM_PJOK_K8/viewform?embedded=true",
-		"KKA": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
-		"KKA1": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true"
-"
+        "KKA": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
+        "KKA1": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true"
       },
       "9": {
         "PAI": "https://docs.google.com/forms/d/e/LINK_FORM_PAI_K9/viewform?embedded=true",
@@ -266,8 +263,8 @@
         "INF": "https://docs.google.com/forms/d/e/LINK_FORM_INF_K9/viewform?embedded=true",
         "SBK": "https://docs.google.com/forms/d/e/LINK_FORM_SBK_K9/viewform?embedded=true",
         "PJOK": "https://docs.google.com/forms/d/e/LINK_FORM_PJOK_K9/viewform?embedded=true",
-		"KKA": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
-		"KKA1": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true"
+        "KKA": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true",
+        "KKA1": "https://docs.google.com/forms/d/e/LINK_FORM_KKA_K7/viewform?embedded=true"
       }
     };
 
@@ -311,11 +308,6 @@
 
       if (mapel === "HINDU" && (kelas === "7" || kelas === "8")) {
         alert("Mata pelajaran Agama Hindu tidak tersedia untuk Kelas " + kelas + "!");
-        return;
-      }
-
-      if (mapel === "KKA" && (kelas === "8" || kelas === "9")) {
-        alert("Mata pelajaran KKA hanya tersedia untuk Kelas 7!");
         return;
       }
 
