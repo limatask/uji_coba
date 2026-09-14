@@ -227,7 +227,6 @@
 
   <script>
     // Konfigurasi tanggal resmi ujian (Tahun, Bulan-1, Tanggal, Jam, Menit)
-    // Silakan sesuaikan tanggal di bawah ini jika jadwal dinas terbit
     const scheduleConfig = {
       "PAI":     { start: new Date(2026, 8, 14,  7, 30), end: new Date(2026, 8, 14,  9,  0) },
       "PAK":     { start: new Date(2026, 8, 14,  7, 30), end: new Date(2026, 8, 14,  9,  0) },
@@ -236,20 +235,20 @@
       "HINDU":   { start: new Date(2026, 8, 14,  7, 30), end: new Date(2026, 8, 14,  9,  0) },
       "IPA":     { start: new Date(2026, 8, 14,  9, 30), end: new Date(2026, 8, 14, 22, 30) },
 
-      "BINDO":   { start: new Date(2026, 8, 15,  0, 00), end: new Date(2026, 8, 15,  12, 0) },
+      "BINDO":   { start: new Date(2026, 8, 15,  0, 00), end: new Date(2026, 8, 15, 12,  0) },
       "IPS":     { start: new Date(2026, 8, 15, 12,  0), end: new Date(2026, 8, 15, 22, 30) },
 
-      "MTK":     { start: new Date(2026, 8, 16,  0, 30), end: new Date(2026, 8, 16,  12, 0) },
-      "BING":    { start: new Date(2026, 8, 16, 12,  0), end: new Date(2026, 8, 16,  22, 0) },
+      "MTK":     { start: new Date(2026, 8, 16,  0, 30), end: new Date(2026, 8, 16, 12,  0) },
+      "BING":    { start: new Date(2026, 8, 16, 12,  0), end: new Date(2026, 8, 16, 22,  0) },
 
-      "PPKN":    { start: new Date(2026, 8, 17,  0, 30), end: new Date(2026, 8, 17,  12, 0) },
-      "INF":     { start: new Date(2026, 8, 17, 12,  0), end: new Date(2026, 8, 17,  22, 0) },
+      "PPKN":    { start: new Date(2026, 8, 17,  0, 30), end: new Date(2026, 8, 17, 12,  0) },
+      "INF":     { start: new Date(2026, 8, 17, 12,  0), end: new Date(2026, 8, 17, 22,  0) },
 
-      "SBK":     { start: new Date(2026, 8, 18,  0, 30), end: new Date(2026, 8, 18,  12,  0) },
-      "PJOK":    { start: new Date(2026, 8, 18,  12, 0), end: new Date(2026, 8, 18,	 22,  0) }
+      "SBK":     { start: new Date(2026, 8, 18,  0, 30), end: new Date(2026, 8, 18, 12,  0) },
+      "PJOK":    { start: new Date(2026, 8, 18, 12,  0), end: new Date(2026, 8, 18, 22,  0) }
     };
 
-    // Link Form Resmi per Kelas (Diisi sesuai link yang kamu berikan)
+    // Link Form Resmi per Kelas
     const linkK7 = "https://forms.gle/jhuxhDApuSFg5qmH8";
     const linkK8 = "https://forms.gle/d78CwrBT3iMtSJwq8";
     const linkK9 = "https://forms.gle/jCeUjoByMk6gDpLt8";
@@ -273,10 +272,11 @@
     };
 
     let violationCount = 0;
-    const maxViolations = 3; // Batas pelanggaran resmi (3 kali)
+    const maxViolations = 5; // Batas pelanggaran resmi diubah menjadi 5 kali
     let isExamStarted = false;
     let currentExamKey = "";
 
+    // Mencegah klik kanan, copy, paste, dan cut
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('copy', e => e.preventDefault());
     document.addEventListener('paste', e => e.preventDefault());
@@ -348,6 +348,7 @@
       isExamStarted = true;
     }
 
+    // Penanganan tombol Back / Kembali pada browser
     window.addEventListener('popstate', function () {
       if (isExamStarted) {
         history.pushState(null, null, location.href);
@@ -360,16 +361,19 @@
       recordViolation(reason);
     }
 
+    // DETEKSI KEHILANGAN FOKUS (Aplikasi Terpisah, Google Lens, Floating Window)
     window.addEventListener('blur', () => {
-      handleVisibilityLoss("Pindah aplikasi / Membuka Notifikasi / Floating Window");
+      handleVisibilityLoss("Pindah aplikasi / Membuka Notifikasi / Floating Window / Google Lens");
     });
 
+    // DETEKSI KELUAR TAB / PINDAH HALAMAN
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         handleVisibilityLoss("Keluar Halaman / Membuka Tab Baru");
       }
     });
 
+    // DETEKSI KELUAR DARILAYAR PENUH (FULLSCREEN)
     document.addEventListener('fullscreenchange', exitHandler);
     document.addEventListener('webkitfullscreenchange', exitHandler);
 
